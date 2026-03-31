@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Phone } from 'lucide-react';
 import { FaWhatsapp, FaViber } from 'react-icons/fa';
 import { SELLER_INFO } from '@/app/lib/constants';
+import { getCategories } from '@/app/lib/api';
 
 const quickLinks = [
   { href: '/', label: 'Početna' },
@@ -11,18 +12,17 @@ const quickLinks = [
   { href: '/#kontakt', label: 'Kontakt' },
 ];
 
-const rootCategories = [
-  { href: '/kategorija/knjige', label: 'Knjige' },
-  { href: '/kategorija/casopisi-i-stripovi', label: 'Časopisi i stripovi' },
-  { href: '/kategorija/antikviteti', label: 'Antikviteti' },
-  { href: '/kategorija/kolekcionarstvo', label: 'Kolekcionarstvo' },
-  { href: '/kategorija/rucni-i-dzepni-satovi', label: 'Satovi' },
-  { href: '/kategorija/nakit-i-dragocenosti', label: 'Nakit' },
-  { href: '/kategorija/audio', label: 'Audio' },
-  { href: '/kategorija/umetnicka-dela-i-materijali', label: 'Umetnička dela' },
-];
+export default async function Footer() {
+  let rootCategories: { slug: string; name: string }[] = [];
+  try {
+    const categories = await getCategories();
+    rootCategories = categories
+      .filter((c) => !c.parentId && c.depth === 0)
+      .map((c) => ({ slug: c.slug, name: c.name }));
+  } catch {
+    // Fallback if API is unavailable
+  }
 
-export default function Footer() {
   return (
     <footer style={{ backgroundColor: '#1a1a2e' }} className="text-gray-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -65,12 +65,12 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-white uppercase tracking-wider mb-4">Kategorije</h3>
             <ul className="space-y-2">
               {rootCategories.map((cat) => (
-                <li key={cat.href}>
+                <li key={cat.slug}>
                   <Link
-                    href={cat.href}
+                    href={`/kategorija/${cat.slug}`}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
-                    {cat.label}
+                    {cat.name}
                   </Link>
                 </li>
               ))}

@@ -353,6 +353,19 @@ export default async function ProductPage({ params }: PageProps) {
                 </div>
               )}
 
+              {/* Seller contact info */}
+              <div className="bg-white rounded-xl border border-gray-200 p-4 mb-5">
+                <div className="text-sm font-semibold mb-2" style={{ color: '#1a1a2e' }}>Prodavac</div>
+                <div className="text-sm text-gray-700 mb-1">{SELLER_INFO.name}</div>
+                <a
+                  href={SELLER_INFO.contact.phoneUrl}
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-[#c9a227] transition-colors"
+                >
+                  <Phone size={14} className="text-gray-400 shrink-0" />
+                  {SELLER_INFO.contact.displayPhone}
+                </a>
+              </div>
+
               {/* Trust box */}
               <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
                 <div className="flex items-start gap-3">
