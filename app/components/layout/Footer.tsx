@@ -67,7 +67,7 @@ export default async function Footer() {
               {rootCategories.map((cat) => (
                 <li key={cat.slug}>
                   <Link
-                    href={`/kategorija/${cat.slug}`}
+                    href={`/prodavnica?kategorija=${cat.slug}`}
                     className="text-sm text-gray-400 hover:text-white transition-colors"
                   >
                     {cat.name}
