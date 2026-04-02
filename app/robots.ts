@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin', '/api/admin'],
       },
     ],
-    sitemap: 'https://rariteti.rs/sitemap.xml',
+    sitemap: 'https://www.rariteti.rs/sitemap.xml',
   };
 }

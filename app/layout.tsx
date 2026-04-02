@@ -58,10 +58,7 @@ export default function RootLayout({
   return (
     <html lang="sr" className={inter.variable}>
       <head>
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-        <link rel="alternate icon" href="/favicon.ico" />
         <meta name="theme-color" content="#1a1a2e" />
-        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="antialiased font-sans" style={{ backgroundColor: '#f8f8f6', color: '#2d2d2d' }}>
         <Header />
